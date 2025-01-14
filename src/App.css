@@ -1,0 +1,192 @@
+/* src/App.css */
+
+/* Base Light Mode Styles */
+body.light-mode {
+  --bg-color: #f1e5ff;
+  --text-color: #407c7f;
+  --header-bg-color: #e4edff42;
+  --button-bg-color: #4CAF50;
+  --button-hover-bg-color: #45a049;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  --bg-color: #181818;
+  --text-color: #cf3434;
+  --header-bg-color: #121212;
+  --button-bg-color: #333;
+  --button-hover-bg-color: #555;
+}
+
+/* Global Styles */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.App-header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.App-header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+button {
+  background-color: var(--button-bg-color);
+  color: var(--text-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+/* Responsive Styles */
+.surahs-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.surah {
+  background-color: #f1f1f1;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  text-align: center;
+}
+
+.verses-list {
+  padding: 20px;
+}
+
+.ayah {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.mode-toggle-btn {
+  background-color: #ff9900;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.mode-toggle-btn:hover {
+  background-color: #cc7a00;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+  .App-header h1 {
+    font-size: 24px;
+  }
+
+  .surah h3 {
+    font-size: 16px;
+  }
+}
+.icon-button {
+  background: none; /* Remove background */
+  border: none; /* Remove border */
+  cursor: pointer; /* Make it a clickable pointer */
+  font-size: 2rem; /* Increase size */
+  color: #832c2c; /* Set desired icon color (adjust as needed) */
+  transition: transform 0.2s, color 0.2s; /* Add smooth transitions */
+}
+
+.icon-button:hover {
+  color: #007bff; /* Change color on hover (optional) */
+  transform: scale(1.2); /* Slight zoom on hover (optional) */
+}
+
+.icon-button:focus {
+  outline: none; /* Remove focus outline */
+}
+.footer {
+ 
+
+  color: #2f5739fc;
+  padding: 20px;
+  text-align: center;
+}
+
+.social-links {
+  margin-bottom: 15px;
+}
+
+.social-icon {
+  color:  #34753b;
+
+  font-size: 1.5rem;
+  margin: 0 10px;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.social-icon:hover {
+  color: #007bff; /* Highlight color */
+  transform: scale(1.2);
+}
+
+.email-box {
+  margin: 20px 0;
+}
+
+.email-box h4 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.email-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.email-input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.email-submit {
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.email-submit:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}
+
+.footer-text {
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
