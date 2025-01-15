@@ -1,27 +1,39 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleLeft, faQuran } from '@fortawesome/free-solid-svg-icons'; // Import icons
-import { fetchSurahs } from './api/fetchChapters';
-import { setSelectedSurah } from './redux/quranSlice';
 import ThemeToggle from './components/ThemeToggle';
-import './App.css';
 import Footer from './components/footer';
+import './App.css';
 
 function App() {
-  const dispatch = useDispatch();
-  const { surahs, selectedSurah, loading, error } = useSelector((state) => state.quran);
+  const [surahs, setSurahs] = useState([]); // State for surahs
+  const [selectedSurah, setSelectedSurah] = useState(null); // State for selected surah
+  const [loading, setLoading] = useState(true); // State for loading
+  const [error, setError] = useState(null); // State for error
 
+  // Fetch data from the static JSON file
   useEffect(() => {
-    dispatch(fetchSurahs());
-  }, [dispatch]);
+    const fetchSurahs = async () => {
+      try {
+        const response = await fetch('/quran.json'); // Fetch JSON from public folder
+        if (!response.ok) throw new Error('Failed to load surahs');
+        const data = await response.json();
+        setSurahs(data.data.surahs); // Set surahs from JSON file
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+    fetchSurahs();
+  }, []);
 
+  // Handle click on a surah
   const handleSurahClick = (surah) => {
-    dispatch(setSelectedSurah(surah));
+    setSelectedSurah(surah);
   };
 
   return (
-    
     <div className="App">
       <header className="App-header">
         <h1>
@@ -29,11 +41,12 @@ function App() {
         </h1>
         <ThemeToggle />
       </header>
-     
-      
+
       <div className="content">
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
+
+        {/* Surah List */}
         {!selectedSurah ? (
           <div className="surahs-list">
             {surahs.map((surah) => (
@@ -49,26 +62,30 @@ function App() {
             ))}
           </div>
         ) : (
+          // Surah Details
           <div className="verses-list">
             <h3>
               {selectedSurah.name} ({selectedSurah.englishName})
             </h3>
-            <button className="icon-button" onClick={() => dispatch(setSelectedSurah(null))}>
-              <FontAwesomeIcon icon={faCircleLeft} /> 
+            <button
+              className="icon-button"
+              onClick={() => setSelectedSurah(null)}
+            >
+              <FontAwesomeIcon icon={faCircleLeft} />
             </button>
             {selectedSurah.ayahs.map((ayah) => (
               <div key={ayah.numberInSurah} className="ayah">
                 <p>{ayah.text}</p>
-                
               </div>
             ))}
           </div>
         )}
-          <Footer></Footer>
       </div>
+
+      <Footer /> {/* Add Footer */}
     </div>
-  
   );
 }
 
 export default App;
+
