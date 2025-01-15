@@ -1,14 +1,12 @@
-import axios from 'axios';
-import { setSurahs, setLoading, setError } from '../redux/quranSlice';
-
-export const fetchSurahs = () => async (dispatch) => {
-  dispatch(setLoading(true));
+// src/api/fetchQuran.js
+export const fetchQuran = async () => {
   try {
-    const response = await axios.get('http://api.alquran.cloud/v1/quran/en.asad');
-    dispatch(setSurahs(response.data.data.surahs));  // Store surahs list
-    dispatch(setLoading(false));
+    const response = await fetch('/quran.json'); // Fetch from public folder
+    if (!response.ok) throw new Error('Failed to fetch Quran data');
+    const data = await response.json();
+    return data;
   } catch (error) {
-    dispatch(setError(error.message));
-    dispatch(setLoading(false));
+    console.error('Error:', error);
+    return null;
   }
 };
